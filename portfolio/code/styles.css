@@ -4,7 +4,7 @@
 body{
     width: 50vw;
     height: 50vh;
-    text-align:center;
+    /*text-align:center;*/
     margin: 10px auto;
     background-color: rgb(236, 247, 247);
 }
