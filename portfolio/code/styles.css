@@ -1,3 +1,43 @@
 *{
     font-family: 'Poppins';
 }
+body{
+    width: 50vw;
+    height: 50vh;
+    text-align:center;
+    margin: 10px auto;
+    background-color: rgb(236, 247, 247);
+}
+
+
+nav ul{
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: space-between;
+}
+
+/*Link styles*/
+
+a{
+    text-decoration: none;
+    color: #000;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.5s;
+    
+}
+
+a:hover{
+    background-color: #f0e4e4;
+    border-bottom: 2px solid 
+}
+
+/*Profile Picture*/
+
+.profile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
