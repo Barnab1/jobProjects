@@ -14,13 +14,38 @@ h1, h2, h3{
     text-align:center;
 }
 
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    width:50%;
+    text-align: center;
+}
+
+.buttons span{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(38, 145, 226);
+    transition: background 0.3s;
+    cursor: pointer;
+}
+
+.buttons span:hover{
+    color: #ffffff;
+    font-weight: 500;
+}
+
 nav ul{
     list-style-type: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    justify-content: space-between;
-    
+    justify-content: space-between;  
+}
+
+.developer{
+    display: none;
 }
 
 ul[class="accountant"]{
@@ -32,9 +57,10 @@ ul[class="developer"]{
 }
 
 /*Link styles*/
-
-a:not(.simple-link){
+a{
     text-decoration: none;
+}
+nav a{
     color: #000;
     padding: 10px;
     border-radius: 5px;
@@ -44,7 +70,6 @@ a:not(.simple-link){
 
 a.simple-link{
     color: rgb(96, 96, 216);
-    text-decoration: none;
 }
 
 
