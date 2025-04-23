@@ -1,5 +1,5 @@
 # jobProjects
-That repository will contain every project I accomplished while 
+That repository contains every project I accomplished while 
 learning to code
 
 # Purpose of Projects
