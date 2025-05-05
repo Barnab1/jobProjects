@@ -74,3 +74,44 @@ KEYS QUESTIONS TO ASK
 
 18.  What will be the typical workflow for key actions, like a user searching for a book and a librarian checking out a book?  How will the frontend (JS, HTML) and backend (PHP, MySQL) interact in these scenarios?
 19.  How will you handle potential errors and display informative messages to the user? 
+
+Here is the overall Architecture
+
+📚 Library Management App
+│
+├── 🏠 Homepage (index.html)
+│   ├── 🔍 Search Bar
+│   ├── 📚 Book Recommendations
+│   └── 👥 What Friends Read
+│
+├── 📖 Book Catalog (catalog.html)
+│   ├── 🔎 Search Results
+│   └── 📘 Book Cards / Table
+│
+├── 📘 Book Details Page (book.html)
+│   ├── 📄 Title, Author, Description
+│   ├── 📍 Availability & Location
+│   └── 📥 Borrow / Reserve Button
+│
+├── 👤 User Profile (profile.html)
+│   ├── 📚 Borrowing History
+│   ├── 📨 Friend Requests
+│   └── 💬 Activity Feed
+│
+├── 🛠️ Admin Interface (admin.html)
+│   ├── ➕ Add/Edit Book
+│   ├── 👥 Manage Members
+│   └── 🔄 Handle Loans
+│
+├── 📁 css/
+│   └── styles.css (UI Design, layout, responsiveness)
+│
+├── 📁 js/
+│   └── main.js (DOM updates, form handling, AJAX)
+│
+└── 📁 php/
+    ├── search_books.php
+    ├── add_book.php
+    ├── borrow_book.php
+    └── get_recommendations.php
+
