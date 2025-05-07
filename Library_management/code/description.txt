@@ -3,7 +3,7 @@ Briefing:
 A library management app is a software application designed to organize, manage, and automate the various operations of a library. 
 Think of it as a digital system that helps librarians and library patrons perform tasks more efficiently than traditional manual methods.
 
-ROLES:
+ROLES: 
 
 I- For Library Staff (Librarians):
 
@@ -110,8 +110,104 @@ Here is the overall Architecture
 │   └── main.js (DOM updates, form handling, AJAX)
 │
 └── 📁 php/
-    ├── search_books.php
-    ├── add_book.php
-    ├── borrow_book.php
-    └── get_recommendations.php
+    ├── search_books
+    ├── add_book
+    ├── borrow_book
+    └── get_recommendations
+
+I- Database Architecture
+    A- tables
+        1- "books":
+            - "book_id" INT UNSIGNED AUTO_INCREMENT PRIMARY KEY: Unique identifier for each book.
+            - "title" VARCHAR(255) NOT NULL: Title of the book.
+            - "author" VARCHAR(255) NOT NULL: Author of the book
+            - "publication_year" SMALLINT UNSIGNED: Year the book was published
+            - "genre" VARCHAR(100): Genre of the book
+            - "status" ENUM('available', 'borrowed', 'lost', 'damaged', 'in_repair') DEFAULT 'available': Current status of the book
+            - "added_date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP: Date when the book was added to the system
+        2- "members" Table:
+
+            - "member_id" INT UNSIGNED AUTO_INCREMENT PRIMARY KEY: Unique identifier for each library member.
+            - "username" VARCHAR(50) UNIQUE NOT NULL: Unique username for the member (for social features).
+            - "password" VARCHAR(255) NOT NULL: Hashed password for the member.
+            - "first_name" VARCHAR(100) NOT NULL: Member's first name.
+            - "last_name" VARCHAR(100) NOT NULL: Member's last name.
+            - "email" VARCHAR(100) UNIQUE: Member's email address (optional, but useful for communication).
+            - "registration_date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP: Date when the member registered.
+        3. "loans" Table:
+
+            - "loan_id" INT UNSIGNED AUTO_INCREMENT PRIMARY KEY: Unique identifier for each loan record.
+            - "book_id" INT UNSIGNED NOT NULL: Foreign key referencing books.book_id.
+            - "member_id" INT UNSIGNED NOT NULL: Foreign key referencing members.member_id.
+            - "borrow_date" TIMESTAMP DEFAULT CURRENT_TIMESTAMP: Date when the book was borrowed.
+            - "due_date" DATE NOT NULL: Date when the book is due to be returned.
+            - "return_date" TIMESTAMP NULL: Date when the book was actually returned (NULL if still borrowed).
+            FOREIGN KEY (book_id) REFERENCES books(book_id)
+            FOREIGN KEY (member_id) REFERENCES members(member_id)
+        
+        4- "friendships" Table:
+
+            - "friendship_id" INT UNSIGNED AUTO_INCREMENT PRIMARY KEY: Unique identifier for each friendship.
+            - "user_id_1" INT UNSIGNED NOT NULL: Foreign key referencing members.member_id for one user in the friendship.
+            - "user_id_2" INT UNSIGNED NOT NULL: Foreign key referencing members.member_id for the other user in the friendship.
+            - "status" ENUM('pending', 'accepted', 'rejected') DEFAULT 'pending': Status of the friendship request.
+            - "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP: Date when the friendship request was created.
+            UNIQUE KEY unique_friendship (user_id_1, user_id_2): Ensures a user pair doesn't have duplicate friendship records (order doesn't matter, so we'll handle that in queries).
+            FOREIGN KEY (user_id_1) REFERENCES members(member_id)
+            FOREIGN KEY (user_id_2) REFERENCES members(member_id)
+        
+        5- "user_activity" Table:
+
+            - "activity_id" INT UNSIGNED AUTO_INCREMENT PRIMARY KEY: Unique identifier for each activity record.
+            - "member_id" INT UNSIGNED NOT NULL: Foreign key referencing members.member_id who performed the activity.
+            - "book_id" INT UNSIGNED NOT NULL: Foreign key referencing books.book_id related to the activity.
+            - "activity_type" ENUM('borrowed', 'returned', 'marked_read') NOT NULL: Type of activity. We can expand this later (e.g., 'rated', 'reviewed').
+            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP: Time of the activity.
+            FOREIGN KEY (member_id) REFERENCES members(member_id)
+            FOREIGN KEY (book_id) REFERENCES books(book_id)
+
+II - Core Application Logic (PHP Scripts):
+
+We'll need specific PHP scripts or functions to handle the core features:
+
+A- Borrowing a Book:
+
+    - Receive book ID and member ID.
+    - Check if the book is available.
+    - Create a new record in the loans table with the borrow date and calculate the due date.
+    - Update the status of the book in the books table to 'borrowed'.
+    - Record the 'borrowed' activity in the user_activity table.
+
+B- Returning a Book:
+
+    - Receive book ID.
+    - Find the corresponding active loan record in the loans table.
+    - Update the return_date in the loans table.
+    - Update the status of the book in the books table to 'available'.
+    - Record the 'returned' activity in the user_activity table.
+
+C- Tracking Location and Book Status:
+
+    - PHP scripts to update the location and status of a book in the books table (likely through an admin interface).
+    - PHP scripts to retrieve and display the current location and status of a book.
+
+Social Features (Initial Implementation):
+
+D- Managing Friendships:
+
+    - PHP scripts to send friend requests (create a new record in friendships with status 'pending').
+    - PHP scripts to accept or reject friend requests (update the status in friendships).
+    - PHP scripts to retrieve a user's friends (query friendships where status is 'accepted').
+
+E- "What Friends Read":
+
+    - PHP script to get a user's friends.
+    - PHP script to query the user_activity table for the borrowing activity of those friends within a certain timeframe.
+    - Format and return this data to be displayed on the frontend.
+
+F- "Books You Might Know":
+
+    - PHP script to retrieve a user's borrowing history from the loans table (or user_activity).
+    -Implement a basic recommendation logic (e.g., find books in the same genre as those the user has borrowed or books borrowed by their friends).
+    -Query the books table to get details of these recommended books.
 
