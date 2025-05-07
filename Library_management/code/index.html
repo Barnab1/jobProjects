@@ -4,8 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Management app</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <header>
+        <div class="app-name">Library App</div>
+        <nav>
+            <ul>
+                <li><a href="#" target="_blank" rel="noreferrer">Accueil</a></li>
+                <li><a href="#" target="_blank" rel="noreferrer">Catalogue</a></li>
+                <li><a href="#" target="_blank" rel="norefferer">Profil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="search-area">
+            <form action="" method="post">
+                <input type="text" placeholder="Rechercher un livre ...">
+                <button type="submit" id="searchBookBtn">Rechercher</button>
+            </form>
+        </div>
+        <div class="news-feed-area">
+            <div class="suggestions">
+                <h2>Suggestions</h2>
+                <div id="suggestions-container"></div>
+            </div>
+            <div class="friend-readings">
+                <h2>Qu'ont lu vos amis</h2>
+                <div class="friend-readings-container"></div>
+            </div>
+        </div>
+
+        
+    </main>
+    <footer>
+        &copy; 2025 Bibliothèque
+    </footer>
+<script src="script.js"></script>    
 </body>
 </html>
