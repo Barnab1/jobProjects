@@ -1,20 +1,23 @@
 body{
     font-family: "Poppins", sans-serif;
     background-color: rgb(252, 249, 249);
+    --text-color: #ffffff;
 }
-
+:root{
+    --header-footer-color: rgb(70, 70, 247);
+}
 header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(70, 70, 247);
+    background-color: var(--header-footer-color);
     color:#ffffff;
     margin-bottom: 10px;
     padding: 10px;
 }
 
 header ul li a{
-    color: #ffffff;
+    color: var(--text-color);
 }
 /* Removing list small icons*/
 ul
@@ -30,4 +33,41 @@ a{
 li{
     display: inline-block;
     margin-right: 5px;;
+}
+
+#searchBookBtn{
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#searchBookInput{
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    padding: 10px;
+}
+.news-feed-area{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.suggestions, .friend-readings{
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+}
+/*
+@scope(.news-feed-area){
+    background: #000;
+}
+    */
+
+footer{
+    margin-top: 20px;
+    text-align: center;
+    background-color: var(--header-footer-color);
+    color: var(--text-color);
+    padding: 10px;
 }
