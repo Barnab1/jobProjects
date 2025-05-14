@@ -18,6 +18,7 @@ header{
 
 header ul li a{
     color: var(--text-color);
+    transition: 0.5s border-bottom;
 }
 /* Removing list small icons*/
 ul
@@ -29,23 +30,34 @@ a{
     text-decoration: none;
 }
 
-/**/
+a:hover{
+    border-bottom: 2px solid pink;
+    border-radius: 2px;
+}
+
 li{
     display: inline-block;
     margin-right: 5px;;
+}
+
+.search-area{
+    margin-bottom: 10px;
 }
 
 #searchBookBtn{
     border: none;
     padding: 10px;
     border-radius: 5px;
+    background-color:blue;
+    color: var(--text-color);
 }
 
 #searchBookInput{
-    border: none;
+    border: 1px solid #55f;
     border-radius: 5px;
     outline: none;
     padding: 10px;
+
 }
 .news-feed-area{
     display: flex;
@@ -71,3 +83,25 @@ footer{
     color: var(--text-color);
     padding: 10px;
 }
+
+.suggestions{
+    font-size: 0.8em;
+}
+.book-space{
+    background-color: whitesmoke;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-space> div:first-of-type{
+  display: flex;
+  justify-content: space-between;  
+}
+
+.author-name{
+    font-weight: bold;
+}
+
+
+
